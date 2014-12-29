@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Import;
 /**
  * Created by edu on 07/12/2014.
  */
-@ComponentScan(basePackages={"com.nva.persistence"})
+@ComponentScan(basePackages={"com.nva.persistence.*"})
 @Import({MysqlConfigurations.class, MongoConfigurations.class, Props.class})
 @Configuration
-public interface PersistenceConfiguration {
+public class PersistenceConfiguration {
 }
