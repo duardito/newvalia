@@ -1,7 +1,7 @@
 package com.nva.web;
 
 import com.nva.integration.ApplicationIntegrationConfig;
-import com.nva.persistence.mongodb.MongoConfigurations;
+import com.nva.persistence.PersistenceConfiguration;
 import com.nva.security.SecurityFilter;
 import com.nva.service.ApplicationConfig;
 import com.nva.web.config.WebMvcConfig;
@@ -16,7 +16,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @PropertySource("classpath:config/init.properties")
 @ComponentScan(basePackages = "com.nva.web.config")
-@Import({WebSecurity.class, WebMvcConfig.class, ApplicationConfig.class, ApplicationIntegrationConfig.class, MongoConfigurations.class, SecurityFilter.class})
+@Import({WebSecurity.class, WebMvcConfig.class, ApplicationConfig.class, ApplicationIntegrationConfig.class, PersistenceConfiguration.class, SecurityFilter.class})
 @Configuration
 public interface WebConfigurations {
 }

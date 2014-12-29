@@ -1,6 +1,5 @@
 package com.nva.web.config;
 
-import com.nva.persistence.PersistenceConfiguration;
 import com.nva.web.WebConfigurations;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.web.context.support.GenericWebApplicationContext;
@@ -20,7 +19,7 @@ public class WebInitContext extends
 
         @Override
         protected Class<?>[] getRootConfigClasses() {
-                return new Class<?>[]{WebConfigurations.class, PersistenceConfiguration.class};
+                return new Class<?>[]{WebConfigurations.class};
         }
 
         @Override
