@@ -13,13 +13,14 @@ import javax.servlet.Filter;
 /**
  * Created by edu on 07/12/2014.
  */
+
 @EnableWebMvc
 public class WebInitContext extends
         AbstractAnnotationConfigDispatcherServletInitializer {
 
         @Override
         protected Class<?>[] getRootConfigClasses() {
-                return new Class<?>[]{WebConfigurations.class};
+                return new Class<?>[]{WebConfigurations.class, };
         }
 
         @Override
