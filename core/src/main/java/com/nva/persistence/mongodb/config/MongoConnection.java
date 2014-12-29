@@ -18,14 +18,11 @@ import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 @Configuration
 public class MongoConnection {
 
-
     private @Value("${db.user}") String user;
     private @Value("${db.password}") String passwd;
     private @Value("${db.host}") String host;
     private @Value("${db.port}") int port;
     private @Value("${db.name}") String dbName;
-
-
 
     @DependsOn("propertyPlaceholderConfigurer")
     @Bean

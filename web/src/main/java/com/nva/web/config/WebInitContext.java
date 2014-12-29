@@ -1,6 +1,5 @@
 package com.nva.web.config;
 
-import com.nva.persistence.PersistenceConfiguration;
 import com.nva.web.WebConfigurations;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.web.context.support.GenericWebApplicationContext;
@@ -14,13 +13,14 @@ import javax.servlet.Filter;
 /**
  * Created by edu on 07/12/2014.
  */
+
 @EnableWebMvc
 public class WebInitContext extends
         AbstractAnnotationConfigDispatcherServletInitializer {
 
         @Override
         protected Class<?>[] getRootConfigClasses() {
-                return new Class<?>[]{WebConfigurations.class, PersistenceConfiguration.class};
+                return new Class<?>[]{WebConfigurations.class, };
         }
 
         @Override

@@ -19,6 +19,12 @@ http://www.w3.org/2001/XMLSchema-instance ">
         <ch.qos.logback-version>1.1.2</ch.qos.logback-version>
         <spring.version>4.0.7.RELEASE</spring.version>
         <spring.security.version>3.2.5.RELEASE</spring.security.version>
+
+        <db.host>${url}</db.host>
+        <db.port>${port}</db.port>
+        <db.user>${user}</db.user>
+        <db.password>${password}</db.password>
+        <db.name>newvalia</db.name>
     </properties>
 
     <dependencyManagement>
@@ -189,8 +195,21 @@ http://www.w3.org/2001/XMLSchema-instance ">
     </dependencies>
 
     <build>
+        <resources>
+            <!-- include main.properties -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>config/init.properties</include>
+                </includes>
+            </resource>
+        </resources>
         <finalName>newvalia</finalName>
         <plugins>
+
+
+
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>

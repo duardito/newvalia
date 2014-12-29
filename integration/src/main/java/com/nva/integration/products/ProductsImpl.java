@@ -10,13 +10,13 @@ import java.util.List;
 /**
  * Created by edu on 09/12/2014.
  */
-@RestController("/product")
+@RestController
 public class ProductsImpl implements ProductsInterface{
 
     @Autowired
     private ProductServiceInterface productServiceInterface;
 
-    @RequestMapping(value = "/find/{name}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/product/find/{name}", method = RequestMethod.GET, produces = "application/json")
     @Override
     public ProductVO findByName(@PathVariable String name) {
         ProductVO productVO = new ProductVO();
@@ -24,13 +24,13 @@ public class ProductsImpl implements ProductsInterface{
         return productServiceInterface.findByName(productVO);
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @RequestMapping(value = "/product/save", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @Override
     public ProductVO save(@RequestBody ProductVO productVO) {
         return productServiceInterface.save(productVO);
     }
 
-    @RequestMapping(value = "/findAll", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/product/findAll", method = RequestMethod.GET, produces = "application/json")
     @Override
     public List<ProductVO> findAll() {
         return productServiceInterface.findAll();

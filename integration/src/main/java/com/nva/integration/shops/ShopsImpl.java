@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created by edu on 19/12/2014.
  */
-@RestController("/shop")
+@RestController
 public class ShopsImpl implements ShopsInterface{
 
     @Autowired
     private ShopServiceInterface shopServiceInterface;
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @RequestMapping(value = "/shop/save", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @Override
     public ShopVO save(ShopVO shopVO) {
 
