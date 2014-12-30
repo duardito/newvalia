@@ -2,6 +2,7 @@ package com.nva.service.test;
 
 import com.nva.log.InitLogger;
 import com.nva.persistence.PersistenceConfiguration;
+import com.nva.persistence.mongodb.entities.logger.Log;
 import com.nva.persistence.mongodb.entities.products.Product;
 import com.nva.persistence.mongodb.entities.shops.Shop;
 import com.nva.persistence.mongodb.entities.users.User;
@@ -20,7 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @EnableAspectJAutoProxy
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {  PersistenceConfiguration.class, ApplicationConfig.class, InitLogger.class})
+@ContextConfiguration( classes = {  PersistenceConfiguration.class, ApplicationConfig.class, InitLogger.class} )
 @ActiveProfiles("mongodb")
 public abstract class AbstractIntegrationTest {
 
@@ -32,7 +33,7 @@ public abstract class AbstractIntegrationTest {
         mongoTemplate.dropCollection(Shop.class);
         mongoTemplate.dropCollection(Product.class);
         mongoTemplate.dropCollection(User.class);
-
+        mongoTemplate.dropCollection(Log.class);
     }
 
 }

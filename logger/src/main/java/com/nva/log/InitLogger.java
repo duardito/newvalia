@@ -12,7 +12,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 public class InitLogger {
 
     @Bean
-    public InstanceObject InstanceObject(){
+    public InstanceObject InstanceObject() {
         return new InstanceObject();
     }
 }
