@@ -1,5 +1,6 @@
 package com.nva.web;
 
+import com.nva.log.InitLogger;
 import com.nva.persistence.Props;
 import com.nva.persistence.mongodb.MongoConfigurations;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,7 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * Created by edu on 07/12/2014.
  */
 @EnableTransactionManagement
-@EnableMongoRepositories(basePackageClasses = {MongoConfigurations.class})
+@EnableMongoRepositories(basePackageClasses = {MongoConfigurations.class, InitLogger.class})
 @PropertySource("classpath:config/init.properties")
 @ComponentScan(basePackages = {
         "com.nva.web.config",
@@ -21,7 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
         "com.nva.support.*",
         "com.nva.persistence.*",
         "com.nva.service.*",
-        "com.nva.log.*"
+        "com.nva.log"
         ,"com.nva.security"} )
 @Import({Props.class})
 @Configuration

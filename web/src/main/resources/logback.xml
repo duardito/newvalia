@@ -15,6 +15,6 @@
 		<appender-ref ref="STDOUT" />
 	</root>
 
-	<logger name="webInit" level="ALL" />
+	<logger name="webInit" level="INFO" />
 
 </configuration>

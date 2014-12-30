@@ -21,7 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @EnableAspectJAutoProxy
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {  PersistenceConfiguration.class, ApplicationConfig.class, InitLogger.class})
+@ContextConfiguration( classes = {  PersistenceConfiguration.class, ApplicationConfig.class, InitLogger.class} )
 @ActiveProfiles("mongodb")
 public abstract class AbstractIntegrationTest {
 
