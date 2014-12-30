@@ -5,7 +5,6 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.web.context.support.GenericWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
@@ -14,13 +13,13 @@ import javax.servlet.Filter;
  * Created by edu on 07/12/2014.
  */
 
-@EnableWebMvc
+
 public class WebInitContext extends
         AbstractAnnotationConfigDispatcherServletInitializer {
 
         @Override
         protected Class<?>[] getRootConfigClasses() {
-                return new Class<?>[]{WebConfigurations.class, };
+                return new Class<?>[]{WebConfigurations.class,};
         }
 
         @Override

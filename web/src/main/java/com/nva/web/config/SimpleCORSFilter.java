@@ -8,6 +8,7 @@ import java.io.IOException;
  * Created by edu on 13/12/2014.
  */
 public class SimpleCORSFilter implements Filter {
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 

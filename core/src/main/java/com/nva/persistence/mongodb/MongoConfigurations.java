@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Profile;
  * Created by edu on 07/12/2014.
  */
 
-@ComponentScan(basePackages = "com.nva.persistence.mongodb.*")
+@ComponentScan
 @Profile("mongodb")
 @Import({MongoConnection.class, CommonConfiguration.class, MongoRepositoryConfiguration.class})
 @Configuration
