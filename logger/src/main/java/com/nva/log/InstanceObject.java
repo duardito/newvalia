@@ -21,7 +21,6 @@ public class InstanceObject {
 
     @Before("execution (* com.nva.service.*.*.*(..))")
     public void beforeGuardar(JoinPoint jp) throws Throwable{
-
         LOGGER.info(" ");
         LOGGER.debug("-------------------------   BEGIN   --------------------------------:" + jp.toShortString() + " " + jp.getTarget().getClass());
     }
