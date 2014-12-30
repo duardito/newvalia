@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Created by edu on 09/12/2014.
  */
-@ComponentScan(basePackageClasses = {ProductServiceImpl.class, ShopServiceImpl.class, UsersServiceImpl.class})
+@ComponentScan( basePackages ="com.nva.service.*" , basePackageClasses = { ProductServiceImpl.class, ShopServiceImpl.class, UsersServiceImpl.class})
 @Configuration
 public interface ApplicationConfig {
 }
