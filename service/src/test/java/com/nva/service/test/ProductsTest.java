@@ -1,5 +1,6 @@
 package com.nva.service.test;
 
+import com.nva.service.ServiceErrors;
 import com.nva.service.products.ProductServiceInterface;
 import com.nva.support.ParamBuilder.ParamsVO;
 import com.nva.support.beans.product.ProductAttributesVO;
@@ -44,7 +45,7 @@ public class ProductsTest extends AbstractIntegrationTest{
     }
 
     //@Test
-    public void addNewPrice(){
+    public void addNewPrice() throws ServiceErrors {
         ProductVO productVO = new ProductVO();
         productVO.setName("leche");
         productVO  = productServiceInterface.findByName(productVO);
