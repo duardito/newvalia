@@ -20,6 +20,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
         "com.nva.support.*",
         "com.nva.persistence.*",
         "com.nva.service.*",
+        "com.nva.service",
         "com.nva.log"
         ,"com.nva.security"} )
 @Import({Props.class})

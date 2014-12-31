@@ -1,5 +1,6 @@
 package com.nva.integration.products;
 
+import com.nva.service.ServiceErrors;
 import com.nva.service.products.ProductServiceInterface;
 import com.nva.support.beans.product.ProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,16 @@ public class ProductsImpl implements ProductsInterface{
 
     @RequestMapping(value = "/product/find/{name}", method = RequestMethod.GET, produces = "application/json")
     @Override
-    public ProductVO findByName(@PathVariable String name) {
+    public ProductVO findByName(@PathVariable String name) throws ServiceErrors {
         ProductVO productVO = new ProductVO();
         productVO.setName(name);
-        return productServiceInterface.findByName(productVO);
+
+        productVO = productServiceInterface.findByName(productVO);
+        if(productVO == null){
+            throw new ServiceErrors();
+        }
+
+        return productVO;
     }
 
     @RequestMapping(value = "/product/save", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
