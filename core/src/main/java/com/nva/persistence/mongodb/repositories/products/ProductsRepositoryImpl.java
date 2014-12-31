@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
+import java.util.List;
+
 /**
  * Created by edu on 07/12/2014.
  */
@@ -49,5 +51,11 @@ public class ProductsRepositoryImpl implements ProductsRepositoryCustom{
         final Query query = new Query();
         query.addCriteria( Criteria.where("name").is(params.getProduct().getName()) );
         return mongoTemplate.findOne(query,Product.class);
+    }
+
+    public List <Product> findProductNotInShop(Params params) {
+        final Query query = new Query();
+        query.addCriteria( Criteria.where("attr.name").nin(params.getShop().getId()) );
+        return mongoTemplate.find(query,Product.class);
     }
 }

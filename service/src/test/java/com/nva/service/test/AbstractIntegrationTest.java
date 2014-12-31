@@ -28,7 +28,7 @@ public abstract class AbstractIntegrationTest {
     @Autowired
     private MongoTemplate mongoTemplate;
 
-   @Test
+   //@Test
     public void aremoveCollections(){
         mongoTemplate.dropCollection(Shop.class);
         mongoTemplate.dropCollection(Product.class);
