@@ -8,6 +8,7 @@ import com.nva.persistence.mongodb.repositories.products.ProductsRepository;
 import com.nva.support.ParamBuilder.ParamsVO;
 import com.nva.support.beans.product.ProductVO;
 import com.nva.support.dozer.DozerConversionInterface;
+import com.nva.support.exceptions.ServiceErrors;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,12 +28,14 @@ public class ProductServiceImpl implements ProductServiceInterface{
     private DozerConversionInterface<?> dozerConversion;
 
     @Override
-    public ProductVO findByName(final ProductVO productVO) {
+    public ProductVO findByName(final ProductVO productVO) throws  ServiceErrors {
 
         final Product product = dozerConversion.map(productVO, Product.class);
 
         final Product productFromDb = productsRepository.findByName(product.getName());
-
+        if(productFromDb == null){
+            throw new ServiceErrors();
+        }
         return dozerConversion.map(productFromDb,ProductVO.class);
     }
 
@@ -45,8 +48,8 @@ public class ProductServiceImpl implements ProductServiceInterface{
 
     @Override
     public List<ProductVO> findAll() {
-        List <Product>lista = productsRepository.findAll();
-        return dozerConversion.map(new DozerBeanMapper(),lista,ProductVO.class);
+        List <Product>list = productsRepository.findAll();
+        return dozerConversion.map(new DozerBeanMapper(),list,ProductVO.class);
     }
 
     @Override
@@ -63,6 +66,13 @@ public class ProductServiceImpl implements ProductServiceInterface{
 
         final Product productFromDb = productsRepository.addNewShop(params);
         return dozerConversion.map(productFromDb,ProductVO.class);
+    }
+
+    @Override
+    public List<ProductVO> findProductNotInShop(ParamsVO paramsVO) {
+        final Params params = getParams(paramsVO);
+        final List<Product> list = productsRepository.findProductNotInShop(params);
+        return dozerConversion.map(new DozerBeanMapper(),list,ProductVO.class);
     }
 
     protected Params getParams(final ParamsVO paramsVO){

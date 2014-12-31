@@ -5,6 +5,7 @@ import com.nva.support.ParamBuilder.ParamsVO;
 import com.nva.support.beans.product.ProductAttributesVO;
 import com.nva.support.beans.product.ProductVO;
 import com.nva.support.beans.shops.ShopVO;
+import com.nva.support.exceptions.ServiceErrors;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,6 +21,18 @@ public class ProductsTest extends AbstractIntegrationTest{
     @Autowired
     private ProductServiceInterface productServiceInterface;
 
+    @Test
+    public void addNewShopNotIn(){
+
+        ShopVO shopVO = new ShopVO();
+        shopVO.setId("carrefour");
+
+        ParamsVO paramsVO = ParamsVO.createNewParamsVO(new ProductVO(),shopVO,new ProductAttributesVO());
+        List <ProductVO> list =  productServiceInterface.findProductNotInShop(paramsVO);
+        for(ProductVO productVO1 : list){
+            System.out.println("this product is not in shop "+shopVO.getId() +": " +productVO1);
+        }
+    }
 
     //@Test
     public void testSearchProduct(){
@@ -31,8 +44,8 @@ public class ProductsTest extends AbstractIntegrationTest{
        // Assert.assertNotNull(newProductVO);
     }
 
-    @Test
-    public void addNewPrice(){
+    //@Test
+    public void addNewPrice() throws ServiceErrors {
         ProductVO productVO = new ProductVO();
         productVO.setName("leche");
         productVO  = productServiceInterface.findByName(productVO);
@@ -56,7 +69,7 @@ public class ProductsTest extends AbstractIntegrationTest{
         saveProductPan();
     }
 
-    @Test
+    //@Test
     public void addShop(){
         String nameAndId = "mercadona";
         ShopVO shopVO = new ShopVO();
@@ -130,7 +143,7 @@ public class ProductsTest extends AbstractIntegrationTest{
         productServiceInterface.save(productVO);
     }
 
-    @Test
+    //@Test
     public void listProducts(){
         List<ProductVO> lista = productServiceInterface.findAll();
         for(ProductVO productVO : lista){
