@@ -1,4 +1,4 @@
-package com.nva.service;
+package com.nva.support.exceptions;
 
 /**
  * Created by edu on 31/12/2014.
