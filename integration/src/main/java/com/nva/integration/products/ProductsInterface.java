@@ -1,6 +1,6 @@
 package com.nva.integration.products;
 
-import com.nva.service.ServiceErrors;
+import com.nva.support.exceptions.ServiceErrors;
 import com.nva.support.beans.product.ProductVO;
 
 import java.util.List;

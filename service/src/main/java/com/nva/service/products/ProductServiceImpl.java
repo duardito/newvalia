@@ -5,10 +5,10 @@ import com.nva.persistence.mongodb.entities.products.Product;
 import com.nva.persistence.mongodb.entities.products.ProductAttributes;
 import com.nva.persistence.mongodb.entities.shops.Shop;
 import com.nva.persistence.mongodb.repositories.products.ProductsRepository;
-import com.nva.service.ServiceErrors;
 import com.nva.support.ParamBuilder.ParamsVO;
 import com.nva.support.beans.product.ProductVO;
 import com.nva.support.dozer.DozerConversionInterface;
+import com.nva.support.exceptions.ServiceErrors;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ public class ProductServiceImpl implements ProductServiceInterface{
     private DozerConversionInterface<?> dozerConversion;
 
     @Override
-    public ProductVO findByName(final ProductVO productVO) throws ServiceErrors {
+    public ProductVO findByName(final ProductVO productVO) throws  ServiceErrors {
 
         final Product product = dozerConversion.map(productVO, Product.class);
 

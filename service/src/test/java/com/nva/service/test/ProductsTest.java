@@ -1,11 +1,11 @@
 package com.nva.service.test;
 
-import com.nva.service.ServiceErrors;
 import com.nva.service.products.ProductServiceInterface;
 import com.nva.support.ParamBuilder.ParamsVO;
 import com.nva.support.beans.product.ProductAttributesVO;
 import com.nva.support.beans.product.ProductVO;
 import com.nva.support.beans.shops.ShopVO;
+import com.nva.support.exceptions.ServiceErrors;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
