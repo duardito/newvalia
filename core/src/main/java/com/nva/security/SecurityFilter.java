@@ -33,7 +33,7 @@ public class SecurityFilter {
         shiroFilterFactoryBean.setSecurityManager(defaultWebSecurityManager());
         shiroFilterFactoryBean.setLoginUrl("/login");
         Map<String,String> filter = new HashMap<String,String>();
-        filter.put("/**","authc");
+        filter.put("/**","anon");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filter);
 
         return shiroFilterFactoryBean;

@@ -1,5 +1,6 @@
 package com.nva.integration.products;
 
+import com.nva.support.exceptions.ServiceErrors;
 import com.nva.support.beans.product.ProductVO;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public interface ProductsInterface {
 
-    public ProductVO findByName(final String name);
+    public ProductVO findByName(final String name) throws ServiceErrors;
     public ProductVO save(final ProductVO productVO);
     public List<ProductVO> findAll();
 

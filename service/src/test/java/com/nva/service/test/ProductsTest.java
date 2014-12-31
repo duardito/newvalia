@@ -5,6 +5,7 @@ import com.nva.support.ParamBuilder.ParamsVO;
 import com.nva.support.beans.product.ProductAttributesVO;
 import com.nva.support.beans.product.ProductVO;
 import com.nva.support.beans.shops.ShopVO;
+import com.nva.support.exceptions.ServiceErrors;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -44,7 +45,7 @@ public class ProductsTest extends AbstractIntegrationTest{
     }
 
     //@Test
-    public void addNewPrice(){
+    public void addNewPrice() throws ServiceErrors {
         ProductVO productVO = new ProductVO();
         productVO.setName("leche");
         productVO  = productServiceInterface.findByName(productVO);
