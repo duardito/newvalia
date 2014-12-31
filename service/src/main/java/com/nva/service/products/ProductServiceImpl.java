@@ -45,8 +45,8 @@ public class ProductServiceImpl implements ProductServiceInterface{
 
     @Override
     public List<ProductVO> findAll() {
-        List <Product>lista = productsRepository.findAll();
-        return dozerConversion.map(new DozerBeanMapper(),lista,ProductVO.class);
+        List <Product>list = productsRepository.findAll();
+        return dozerConversion.map(new DozerBeanMapper(),list,ProductVO.class);
     }
 
     @Override
@@ -63,6 +63,13 @@ public class ProductServiceImpl implements ProductServiceInterface{
 
         final Product productFromDb = productsRepository.addNewShop(params);
         return dozerConversion.map(productFromDb,ProductVO.class);
+    }
+
+    @Override
+    public List<ProductVO> findProductNotInShop(ParamsVO paramsVO) {
+        final Params params = getParams(paramsVO);
+        final List<Product> list = productsRepository.findProductNotInShop(params);
+        return dozerConversion.map(new DozerBeanMapper(),list,ProductVO.class);
     }
 
     protected Params getParams(final ParamsVO paramsVO){

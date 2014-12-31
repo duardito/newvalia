@@ -2,7 +2,7 @@ package com.nva.service.test;
 
 import com.nva.log.InitLogger;
 import com.nva.persistence.PersistenceConfiguration;
-import com.nva.persistence.mongodb.entities.logger.Log;
+import com.nva.log.bean.Log;
 import com.nva.persistence.mongodb.entities.products.Product;
 import com.nva.persistence.mongodb.entities.shops.Shop;
 import com.nva.persistence.mongodb.entities.users.User;
@@ -28,7 +28,7 @@ public abstract class AbstractIntegrationTest {
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    @Test
+   @Test
     public void aremoveCollections(){
         mongoTemplate.dropCollection(Shop.class);
         mongoTemplate.dropCollection(Product.class);

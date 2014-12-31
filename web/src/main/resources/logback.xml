@@ -2,7 +2,7 @@
 <configuration scan="true" scanPeriod="3 seconds">
 	<contextName>test</contextName>
 
-	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+	<appender name="DEBUG" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<pattern>
 				%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{32} - %msg%n
@@ -11,10 +11,10 @@
 	</appender>
 
 	<jmxConfigurator />
-	<root level="INFO">
+	<root level="DEBUG">
 		<appender-ref ref="STDOUT" />
 	</root>
 
-	<logger name="webInit" level="INFO" />
+	<logger name="webInit" level="DEBUG" />
 
 </configuration>
