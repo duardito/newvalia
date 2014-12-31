@@ -1,6 +1,5 @@
-package com.nva.persistence.mongodb.entities.logger;
+package com.nva.log.bean;
 
-import com.nva.persistence.mongodb.entities.MongoAuditedDocument;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -10,7 +9,7 @@ import java.util.Date;
  * Created by edu on 30/12/2014.
  */
 @Document(collection="logs")
-public class Log extends MongoAuditedDocument {
+public class Log {
 
     private Date date;
 
