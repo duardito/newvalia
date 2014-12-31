@@ -8,12 +8,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Created by edu on 07/12/2014.
  */
-@EnableTransactionManagement
 @EnableMongoRepositories(basePackageClasses = {MongoConfigurations.class, InitLogger.class})
 @PropertySource("classpath:config/init.properties")
 @ComponentScan(basePackages = {

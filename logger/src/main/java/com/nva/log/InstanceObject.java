@@ -1,13 +1,13 @@
 package com.nva.log;
 
+import com.nva.log.bean.Log;
+import com.nva.log.service.LogServiceInterface;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.Method;
 
@@ -17,12 +17,28 @@ import java.lang.reflect.Method;
 @Aspect
 public class InstanceObject {
 
+    @Autowired
+    private LogServiceInterface logServiceInterface;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(InstanceObject.class);
+
+   // @Around("execution (* com.nva.service.*.*.*(..))")
+    public void dataAccessOperation() {
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+    }
+
 
     @Before("execution (* com.nva.service.*.*.*(..))")
     public void beforeGuardar(JoinPoint jp) throws Throwable{
+
+        String msg = "-------------------------   BEGIN   --------------------------------:" + jp.toShortString() + " " + jp.getTarget().getClass();
+
+        Log log = new Log();
+        log.setErrorMessage(msg);
+        logServiceInterface.saveLog(log);
+
         LOGGER.info(" ");
-        LOGGER.debug("-------------------------   BEGIN   --------------------------------:" + jp.toShortString() + " " + jp.getTarget().getClass());
+        LOGGER.debug(msg);
     }
 
     @After("execution (* com.nva.service.*.*.*(..))")

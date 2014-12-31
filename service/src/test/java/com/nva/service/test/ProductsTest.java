@@ -20,6 +20,18 @@ public class ProductsTest extends AbstractIntegrationTest{
     @Autowired
     private ProductServiceInterface productServiceInterface;
 
+    @Test
+    public void addNewShopNotIn(){
+
+        ShopVO shopVO = new ShopVO();
+        shopVO.setId("carrefour");
+
+        ParamsVO paramsVO = ParamsVO.createNewParamsVO(new ProductVO(),shopVO,new ProductAttributesVO());
+        List <ProductVO> list =  productServiceInterface.findProductNotInShop(paramsVO);
+        for(ProductVO productVO1 : list){
+            System.out.println("this product is not in shop "+shopVO.getId() +": " +productVO1);
+        }
+    }
 
     //@Test
     public void testSearchProduct(){
@@ -31,7 +43,7 @@ public class ProductsTest extends AbstractIntegrationTest{
        // Assert.assertNotNull(newProductVO);
     }
 
-    @Test
+    //@Test
     public void addNewPrice(){
         ProductVO productVO = new ProductVO();
         productVO.setName("leche");
@@ -56,7 +68,7 @@ public class ProductsTest extends AbstractIntegrationTest{
         saveProductPan();
     }
 
-    @Test
+    //@Test
     public void addShop(){
         String nameAndId = "mercadona";
         ShopVO shopVO = new ShopVO();
@@ -130,7 +142,7 @@ public class ProductsTest extends AbstractIntegrationTest{
         productServiceInterface.save(productVO);
     }
 
-    @Test
+    //@Test
     public void listProducts(){
         List<ProductVO> lista = productServiceInterface.findAll();
         for(ProductVO productVO : lista){

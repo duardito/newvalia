@@ -15,4 +15,5 @@ public interface ProductServiceInterface {
     public List<ProductVO> findAll();
     public ProductVO updatePrice(final ParamsVO paramsVO);
     public ProductVO addNewShop(final ParamsVO params);
+    public List<ProductVO>findProductNotInShop(final ParamsVO paramsVO);
 }
