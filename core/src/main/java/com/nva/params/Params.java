@@ -5,6 +5,13 @@ import com.nva.persistence.mongodb.entities.products.ProductAttributes;
 import com.nva.persistence.mongodb.entities.shops.Shop;
 
 /**
+ * backend immutable class focused to wrap all parameters in backend object, each method will have only one parameter,
+ * with this decission we are avoiding to have methods with an excesive parameters.
+ *
+ * add an extra private constructor and a public static instantiate when required
+ *
+ * @since 1.0
+ * @author Eduard frades
  * Created by edu on 20/12/2014.
  */
 public final class Params {

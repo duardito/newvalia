@@ -5,6 +5,13 @@ import com.nva.support.beans.product.ProductVO;
 import com.nva.support.beans.shops.ShopVO;
 
 /**
+ * view object immutable class focused to wrap all parameters in view object, each method will have only one parameter,
+ * with this decission we are avoiding to have methods with an excesive parameters.
+ *
+ * add an extra private constructor and a public static instantiate when required
+ *
+ * @since 1.0
+ * @author Eduard frades
  * Created by edu on 20/12/2014.
  */
 public final class ParamsVO {
