@@ -1,13 +1,12 @@
 package com.nva.service.test;
 
 import com.nva.log.InitLogger;
-import com.nva.persistence.PersistenceConfiguration;
 import com.nva.log.bean.Log;
+import com.nva.persistence.PersistenceConfiguration;
 import com.nva.persistence.mongodb.entities.products.Product;
 import com.nva.persistence.mongodb.entities.shops.Shop;
 import com.nva.persistence.mongodb.entities.users.User;
 import com.nva.service.ApplicationConfig;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -28,7 +27,7 @@ public abstract class AbstractIntegrationTest {
     @Autowired
     private MongoTemplate mongoTemplate;
 
-   @Test
+   //@Test
     public void aremoveCollections(){
         mongoTemplate.dropCollection(Shop.class);
         mongoTemplate.dropCollection(Product.class);

@@ -13,19 +13,19 @@ import java.util.List;
 @Document(collection="products")
 public class Product extends MongoAuditedDocument {
 
-    private List<Shop> attr;
+    private List<Shop> shopList;
 
-    public List<Shop> getAttr() {
-        return attr;
+    public List<Shop> getShopList() {
+        return shopList;
     }
 
-    public void setAttr(List<Shop> attr) {
-        this.attr = attr;
+    public void setShopList(List<Shop> shopList) {
+        this.shopList = shopList;
     }
 
     protected String getPriceByDateAndShop(){
         StringBuffer sb = new StringBuffer();
-        for(Shop shop : attr){
+        for(Shop shop : shopList){
             final String shopName =  shop.getName();
             sb.append(" shop name: ").append(shopName).append(", ");
             sb.append(" has this product:").append(getName()).append(", ");

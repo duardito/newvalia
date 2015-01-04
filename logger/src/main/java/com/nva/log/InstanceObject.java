@@ -38,7 +38,7 @@ public class InstanceObject {
         logServiceInterface.saveLog(log);
 
         LOGGER.info(" ");
-        LOGGER.debug(msg);
+        LOGGER.info(msg);
     }
 
     @After("execution (* com.nva.service.*.*.*(..))")

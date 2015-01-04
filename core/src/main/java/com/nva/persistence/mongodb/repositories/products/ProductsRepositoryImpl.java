@@ -22,7 +22,7 @@ public class ProductsRepositoryImpl implements ProductsRepositoryCustom{
     public Product update(Product product) {
         final Query query = new Query();
         query.addCriteria( Criteria.where("name").is(product.getName()) );
-        return mongoTemplate.findAndModify(query, Update.update("price", product.getAttr().get(0)), Product.class);
+        return mongoTemplate.findAndModify(query, Update.update("price", product.getShopList().get(0)), Product.class);
     }
 
     public Product addNewPrice(Params params){
