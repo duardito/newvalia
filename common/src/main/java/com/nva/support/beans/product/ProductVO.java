@@ -11,19 +11,19 @@ import java.util.List;
  */
 public class ProductVO extends AbstractVO {
 
-    private List <ShopVO>attr;
+    private List <ShopVO>shopList;
 
-    public List<ShopVO> getAttr() {
-        return attr;
+    public List<ShopVO> getShopList() {
+        return shopList;
     }
 
-    public void setAttr(List<ShopVO> attr) {
-        this.attr = attr;
+    public void setShopList(List<ShopVO> shopList) {
+        this.shopList = shopList;
     }
 
     protected String getPriceByDateAndShop(){
         StringBuffer sb = new StringBuffer();
-        for(ShopVO shop : attr){
+        for(ShopVO shop : shopList){
             final String shopName =  shop.getName();
             sb.append(" shop name: ").append(shopName).append(", ");
             sb.append(" has this product:").append(getName()).append(", ");

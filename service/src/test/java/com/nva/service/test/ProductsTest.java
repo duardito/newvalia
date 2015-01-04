@@ -66,7 +66,7 @@ public class ProductsTest extends AbstractIntegrationTest{
     @Test
     public void saveProducts(){
         saveProductLeche();
-        saveProductPan();
+        //saveProductPan();
     }
 
     //@Test
@@ -82,7 +82,7 @@ public class ProductsTest extends AbstractIntegrationTest{
 
 
         for(ProductVO productVO : lista){
-            productVO.setAttr(shopList);
+            productVO.setShopList(shopList);
             ParamsVO paramsVO = ParamsVO.createNewParamsVO(productVO,shopVO,new ProductAttributesVO());
             productServiceInterface.addNewShop(paramsVO);
         }
@@ -111,7 +111,7 @@ public class ProductsTest extends AbstractIntegrationTest{
 
         shopVO.setProductAttr(attr);
         lista.add(shopVO);
-        productVO.setAttr(lista);
+        productVO.setShopList(lista);
 
         productServiceInterface.save(productVO);
     }
@@ -138,7 +138,7 @@ public class ProductsTest extends AbstractIntegrationTest{
 
         shopVO.setProductAttr(attr);
         lista.add(shopVO);
-        productVO.setAttr(lista);
+        productVO.setShopList(lista);
 
         productServiceInterface.save(productVO);
     }
