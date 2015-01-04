@@ -66,7 +66,7 @@ public class ProductsTest extends AbstractIntegrationTest{
     @Test
     public void saveProducts(){
         saveProductLeche();
-        saveProductPan();
+        //saveProductPan();
     }
 
     //@Test
