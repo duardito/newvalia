@@ -26,7 +26,7 @@
             $scope.submit = function() {
                 //
                 $http.post('http://localhost:8080/newvalia/product/save',
-                        {attr: [{id: $scope.shop,productAttr:[{price: $scope.price,date: $scope.date}],name: $scope.shop}], name: $scope.name}).
+                        {shopList: [{id: $scope.shop, name: $scope.name, productAttr:[{price: $scope.price,date: $scope.date}],name: $scope.shop}]}).
                         success(function(data, status, headers, config) {
                             // this callback will be called asynchronously
                             // when the response is available
@@ -70,17 +70,12 @@
                 {{module.name}}
             </td>
             <td>
-        <tr ng-repeat="col in module.attr">
+        <tr ng-repeat="col in module.shopList">
             <td>
                 {{col.name}}
             </td>
-            <td><select ng-model="selected.value" ng-options="pp.price for pp in col.productAttr"></select>
+            <td><select ng-model="selected.value" ng-options='pp.total as (  (pp.date | date:"dd/MM/yyyy") + ", "+ pp.price) for pp in col.productAttr'></select>
             </td>
-            <td ng-repeat="pp in col.productAttr">
-                {{pp.price}}
-                {{pp.date | date}}
-            </td>
-
         </tr>
         </td>
         </tr>
