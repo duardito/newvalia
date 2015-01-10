@@ -31,9 +31,9 @@ public class ProductsRepositoryImpl implements ProductsRepositoryCustom{
                 Query.query(
                         Criteria.where("name").is(params.getProduct().getName())
                                 .andOperator(
-                                        Criteria.where("attr.name").is(params.getShop().getId()))),
+                                        Criteria.where("shopList.name").is(params.getShop().getId()))),
                 new Update()
-                        .push("attr.$.productAttr", params.getProductAttributes()), Product.class);
+                        .push("shopList.$.productAttr", params.getProductAttributes()), Product.class);
 
         final Query query = new Query();
         query.addCriteria( Criteria.where("name").is(params.getProduct().getName()) );
@@ -46,7 +46,7 @@ public class ProductsRepositoryImpl implements ProductsRepositoryCustom{
                 Query.query(
                         Criteria.where("name").is(params.getProduct().getName())),
                 new Update()
-                        .push("attr", params.getShop()), Product.class);
+                        .push("shopList", params.getShop()), Product.class);
 
         final Query query = new Query();
         query.addCriteria( Criteria.where("name").is(params.getProduct().getName()) );
@@ -55,7 +55,7 @@ public class ProductsRepositoryImpl implements ProductsRepositoryCustom{
 
     public List <Product> findProductNotInShop(Params params) {
         final Query query = new Query();
-        query.addCriteria( Criteria.where("attr.name").nin(params.getShop().getId()) );
+        query.addCriteria( Criteria.where("shopList.name").nin(params.getShop().getId()) );
         return mongoTemplate.find(query,Product.class);
     }
 }

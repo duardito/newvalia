@@ -23,17 +23,21 @@ public class ProductVO extends AbstractVO {
 
     protected String getPriceByDateAndShop(){
         StringBuffer sb = new StringBuffer();
-        for(ShopVO shop : shopList){
-            final String shopName =  shop.getName();
-            sb.append(" shop name: ").append(shopName).append(", ");
-            sb.append(" has this product:").append(getName()).append(", ");
-            for(ProductAttributesVO productAttributes : shop.getProductAttr()){
-                final String shopPrice = productAttributes.getPrice();
-                final Date shopDate = productAttributes.getDate();
-                sb.append(" with price:").append(shopPrice).append(", ");
-                sb.append(" in this date:").append(shopDate).append(".");
+        try{
+            for(ShopVO shop : shopList){
+                final String shopName =  shop.getName();
+                sb.append(" shop name: ").append(shopName).append(", ");
+                sb.append(" has this product:").append(getName()).append(", ");
+                for(ProductAttributesVO productAttributes : shop.getProductAttr()){
+                    final String shopPrice = productAttributes.getPrice();
+                    final Date shopDate = productAttributes.getDate();
+                    sb.append(" with price:").append(shopPrice).append(", ");
+                    sb.append(" in this date:").append(shopDate).append(".");
+                }
             }
+        }catch (Exception e){
         }
+
         return sb.toString();
     }
 
