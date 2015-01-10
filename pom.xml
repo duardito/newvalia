@@ -20,6 +20,7 @@ http://www.w3.org/2001/XMLSchema-instance ">
         <spring.version>4.0.7.RELEASE</spring.version>
         <spring.security.version>3.2.5.RELEASE</spring.security.version>
 
+		
         <db.host>${url}</db.host>
         <db.port>${port}</db.port>
         <db.user>${user}</db.user>
