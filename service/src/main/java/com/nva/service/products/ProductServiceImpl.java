@@ -6,13 +6,15 @@ import com.nva.persistence.mongodb.entities.products.ProductAttributes;
 import com.nva.persistence.mongodb.entities.shops.Shop;
 import com.nva.persistence.mongodb.repositories.products.ProductsRepository;
 import com.nva.support.ParamBuilder.ParamsVO;
+import com.nva.support.beans.product.ProductAttributesVO;
 import com.nva.support.beans.product.ProductVO;
+import com.nva.support.beans.shops.ShopVO;
 import com.nva.support.dozer.DozerConversionInterface;
-import com.nva.support.exceptions.ServiceErrors;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,22 +30,43 @@ public class ProductServiceImpl implements ProductServiceInterface{
     private DozerConversionInterface<?> dozerConversion;
 
     @Override
-    public ProductVO findByName(final ProductVO productVO) throws  ServiceErrors {
+    public ProductVO findByName(final ProductVO productVO){
 
         final Product product = dozerConversion.map(productVO, Product.class);
 
         final Product productFromDb = productsRepository.findByName(product.getName());
         if(productFromDb == null){
-            throw new ServiceErrors();
+           return null;
         }
         return dozerConversion.map(productFromDb,ProductVO.class);
     }
 
     @Override
     public ProductVO save(final ProductVO productVO) {
-        final Product product = dozerConversion.map(productVO, Product.class);
-        final Product productFromDb = productsRepository.save(product);
-        return dozerConversion.map(productFromDb,ProductVO.class);
+
+        final ProductVO p = findByName(productVO);
+        if(p == null){
+            final Product product = dozerConversion.map(productVO, Product.class);
+            final Product productFromDb = productsRepository.save(product);
+            return dozerConversion.map(productFromDb,ProductVO.class);
+
+        }else{
+            ShopVO shopVO = new ShopVO();
+            String shopName = productVO.getShopList().get(0).getName();
+            shopVO.setName(shopName);
+            shopVO.setId(shopName);
+
+            ProductAttributesVO productAttributesVO = new ProductAttributesVO();
+            String price = productVO.getShopList().get(0).getProductAttr().get(0).getPrice();
+            Date date = productVO.getShopList().get(0).getProductAttr().get(0).getDate();
+            productAttributesVO.setDate(date);
+            productAttributesVO.setPrice(price);
+
+            ParamsVO paramsVO = ParamsVO.createNewParamsVO(productVO, shopVO,  productAttributesVO);
+            updatePrice(paramsVO);
+        }
+        return new ProductVO();
+
     }
 
     @Override
