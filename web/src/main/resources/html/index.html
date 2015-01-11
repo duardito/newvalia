@@ -44,8 +44,7 @@
                         console.log("error");
                     });
         });
-
-
+        
         appModule.controller('rest',function($scope, $http) {
             $scope.selected = {};
             $http.get('http://localhost:8080/newvalia/product/findAll').
@@ -55,9 +54,6 @@
                     }).error(function(data) {
                         console.log("error");
                     });
-
-
-
         });
 
         appModule.controller('saveShopController',function($scope, $http) {
