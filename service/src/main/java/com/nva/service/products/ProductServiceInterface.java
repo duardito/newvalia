@@ -12,7 +12,7 @@ import java.util.List;
 public interface ProductServiceInterface {
 
     public ProductVO findByName(final ProductVO product) throws ServiceErrors;
-    public ProductVO save(ProductVO product);
+    public ProductVO save(ProductVO product) throws ServiceErrors;
     public List<ProductVO> findAll();
     public ProductVO updatePrice(final ParamsVO paramsVO);
     public ProductVO addNewShop(final ParamsVO params);
