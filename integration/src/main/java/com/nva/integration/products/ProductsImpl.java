@@ -33,7 +33,7 @@ public class ProductsImpl implements ProductsInterface{
 
     @RequestMapping(value = "/product/save", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @Override
-    public ProductVO save(@RequestBody ProductVO productVO) {
+    public ProductVO save(@RequestBody ProductVO productVO) throws ServiceErrors {
         return productServiceInterface.save(productVO);
     }
 
