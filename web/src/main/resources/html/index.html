@@ -23,9 +23,51 @@
 
         appModule.controller('saveProductController',function($scope, $http) {
             $scope.submit = function() {
-                //
+                console.log('$scope.shop' ,$scope.shop);
+                console.log('$scope.shop.value' ,$scope.shop.value);
                 $http.post('http://localhost:8080/newvalia/product/save',
-                        {"name": $scope.nameProduct,"shopList":[{"id":$scope.shop,"name":$scope.shop,"productAttr":[{"price":$scope.price,"date":$scope.date}]}]}).
+                        {"name": $scope.nameProduct,"shopList":[{"id":$scope.shop.id,"name":$scope.shop.id,"productAttr":[{"price":$scope.price,"date":$scope.date}]}]}).
+
+
+                        success(function(data, status, headers, config) {
+                            // this callback will be called asynchronously
+                            // when the response is available
+                        }).
+                        error(function(data, status, headers, config) {
+                            // called asynchronously if an error occurs
+                            // or server returns response with an error status.
+                        });
+            };
+            $http.get('http://localhost:8080/newvalia/shop/findAll').
+                    success(function(data) {
+                        $scope.shops = data;
+                        console.log("out shop", $scope.shops);
+                    }).error(function(data) {
+                        console.log("error");
+                    });
+        });
+
+
+        appModule.controller('rest',function($scope, $http) {
+            $scope.selected = {};
+            $scope.selectedShop = {};
+            $http.get('http://localhost:8080/newvalia/product/findAll').
+                    success(function(data) {
+                        $scope.products = data;
+                        console.log("out ", $scope.products);
+                    }).error(function(data) {
+                        console.log("error");
+                    });
+
+
+
+        });
+
+        appModule.controller('saveShopController',function($scope, $http) {
+            $scope.submitShop = function() {
+                //
+                $http.post('http://localhost:8080/newvalia/shop/save',
+                        {"name": $scope.nameShop, "id": $scope.nameShop}).
                         success(function(data, status, headers, config) {
                             // this callback will be called asynchronously
                             // when the response is available
@@ -40,6 +82,18 @@
 </head>
 
 <body>
+<form ng-submit="submitShop()" ng-controller="saveShopController">
+    <table>
+        <tr>
+            <td>Shop name:</td><td> <input type="text" ng-model="nameShop"  /></td>
+        </tr>
+
+        <tr>
+            <td><input type="submit" id="submitShop" value="Submit" /></td>
+        </tr>
+    </table>
+</form>
+
 <form ng-submit="submit()" ng-controller="saveProductController">
     <table>
         <tr>
@@ -53,7 +107,7 @@
         </tr>
 
         <tr>
-            <td>Shop: </td><td> <input type="text" ng-model="shop" required /></td>
+            <td>Shop: </td><td><select ng-model="shop" ng-options='shop.name for shop in shops'></select></td>
         </tr>
 
         <tr>
