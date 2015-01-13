@@ -44,7 +44,7 @@ public class ProductsTest extends AbstractIntegrationTest{
        // Assert.assertNotNull(newProductVO);
     }
 
-    @Test
+    //@Test
     public void addNewPrice() throws ServiceErrors {
         ProductVO productVO = new ProductVO();
         productVO.setName("leche");
@@ -69,7 +69,7 @@ public class ProductsTest extends AbstractIntegrationTest{
         //saveProductPan();
     }
 
-    @Test
+    //@Test
     public void addShop(){
         String nameAndId = "pepito";
         ShopVO shopVO = new ShopVO();
@@ -143,7 +143,7 @@ public class ProductsTest extends AbstractIntegrationTest{
         productServiceInterface.save(productVO);
     }
 
-    //@Test
+    @Test
     public void listProducts(){
         List<ProductVO> lista = productServiceInterface.findAll();
         for(ProductVO productVO : lista){
