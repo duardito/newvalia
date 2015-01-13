@@ -64,7 +64,7 @@ public class ProductsTest extends AbstractIntegrationTest{
     }
 
     //@Test
-    public void saveProducts(){
+    public void saveProducts() throws ServiceErrors {
         saveProductLeche();
         //saveProductPan();
     }
@@ -88,7 +88,7 @@ public class ProductsTest extends AbstractIntegrationTest{
         }
     }
 
-    public void  saveProductLeche(){
+    public void  saveProductLeche() throws ServiceErrors {
         String nameAndId = "carrefour";
         ProductVO productVO = new ProductVO();
         productVO.setName("leche");
@@ -117,7 +117,7 @@ public class ProductsTest extends AbstractIntegrationTest{
     }
 
 
-    public void  saveProductPan(){
+    public void  saveProductPan() throws ServiceErrors {
         String nameAndId = "mercadona";
         ProductVO productVO = new ProductVO();
         productVO.setName("pan bimbo");
