@@ -10,6 +10,7 @@ import com.nva.support.beans.product.ProductAttributesVO;
 import com.nva.support.beans.product.ProductVO;
 import com.nva.support.beans.shops.ShopVO;
 import com.nva.support.dozer.DozerConversionInterface;
+import com.nva.support.exceptions.ServiceErrors;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,43 +31,55 @@ public class ProductServiceImpl implements ProductServiceInterface{
     private DozerConversionInterface<?> dozerConversion;
 
     @Override
-    public ProductVO findByName(final ProductVO productVO){
+    public ProductVO findByName(final ProductVO productVO) throws ServiceErrors {
+        try {
+            final Product product = dozerConversion.map(productVO, Product.class);
 
-        final Product product = dozerConversion.map(productVO, Product.class);
-
-        final Product productFromDb = productsRepository.findByName(product.getName());
-        if(productFromDb == null){
-           return null;
+            final Product productFromDb = productsRepository.findByName(product.getName());
+            if(productFromDb == null){
+                return null;
+            }
+            return dozerConversion.map(productFromDb,ProductVO.class);
+        }catch (Exception e){
+            throw new ServiceErrors();
         }
-        return dozerConversion.map(productFromDb,ProductVO.class);
     }
 
     @Override
-    public ProductVO save(final ProductVO productVO) {
+    public ProductVO save(final ProductVO productVO) throws ServiceErrors {
 
         final ProductVO p = findByName(productVO);
+        //if product doesn't exist
         if(p == null){
             final Product product = dozerConversion.map(productVO, Product.class);
             final Product productFromDb = productsRepository.save(product);
             return dozerConversion.map(productFromDb,ProductVO.class);
 
         }else{
-            ShopVO shopVO = new ShopVO();
-            String shopName = productVO.getShopList().get(0).getName();
+            final ShopVO shopVO = new ShopVO();
+            final String shopName = productVO.getShopList().get(0).getName();
             shopVO.setName(shopName);
             shopVO.setId(shopName);
 
-            ProductAttributesVO productAttributesVO = new ProductAttributesVO();
-            String price = productVO.getShopList().get(0).getProductAttr().get(0).getPrice();
-            Date date = productVO.getShopList().get(0).getProductAttr().get(0).getDate();
+            final ProductAttributesVO productAttributesVO = new ProductAttributesVO();
+            final String price = productVO.getShopList().get(0).getProductAttr().get(0).getPrice();
+            final Date date = productVO.getShopList().get(0).getProductAttr().get(0).getDate();
             productAttributesVO.setDate(date);
             productAttributesVO.setPrice(price);
 
-            ParamsVO paramsVO = ParamsVO.createNewParamsVO(productVO, shopVO,  productAttributesVO);
-            updatePrice(paramsVO);
+            final ParamsVO paramsVO = ParamsVO.createNewParamsVO(productVO, shopVO,  productAttributesVO);
+            final List <ProductVO> list =  findProductNotInShop(paramsVO);
+            //if current shop exists in current product we will update price
+            if(list.isEmpty()){
+                updatePrice(paramsVO);
+
+            //else create shop and update price
+            }else{
+                addNewShop( paramsVO);
+                updatePrice(paramsVO);
+            }
         }
         return new ProductVO();
-
     }
 
     @Override
@@ -95,6 +108,9 @@ public class ProductServiceImpl implements ProductServiceInterface{
     public List<ProductVO> findProductNotInShop(ParamsVO paramsVO) {
         final Params params = getParams(paramsVO);
         final List<Product> list = productsRepository.findProductNotInShop(params);
+        if(list == null){
+            return null;
+        }
         return dozerConversion.map(new DozerBeanMapper(),list,ProductVO.class);
     }
 

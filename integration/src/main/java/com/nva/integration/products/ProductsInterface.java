@@ -11,7 +11,7 @@ import java.util.List;
 public interface ProductsInterface {
 
     public ProductVO findByName(final String name) throws ServiceErrors;
-    public ProductVO save(final ProductVO productVO);
+    public ProductVO save(final ProductVO productVO) throws ServiceErrors;
     public List<ProductVO> findAll();
 
 }

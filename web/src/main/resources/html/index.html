@@ -1,19 +1,27 @@
 <html ng-app="myApp">
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-table.css">
     <style>
+        #rest{
+            height: 50x;
+        }
         #colored {
             background-color: #b0c4de;
         }
+
     </style>
     <script src="https://code.angularjs.org/1.3.6/angular.js"></script>
     <script src="https://code.angularjs.org/1.3.6/angular.min.js.map"></script>
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+
 
     <script>
         var appModule = angular.module('myApp', []);
 
         appModule.controller('rest',function($scope, $http) {
             $scope.selected = {};
-            $http.get('http://localhost:8080/newvalia/product/findAll').
+            $http.get('http://31.200.241.46:8080/newvalia/product/findAll').
                     success(function(data) {
                         $scope.products = data;
                     }).error(function(data) {
@@ -23,8 +31,10 @@
 
         appModule.controller('saveProductController',function($scope, $http) {
             $scope.submit = function() {
-                $http.post('http://localhost:8080/newvalia/product/save',
-                        {"name": $scope.nameProduct,"shopList":[{"id":$scope.shop.id,"name":$scope.shop.id,"productAttr":[{"price":$scope.price,"date":$scope.date}]}]}).
+                console.log('$scope.shop' ,$scope.shop);
+                console.log('$scope.shop.value' ,$scope.shop.value);
+                $http.post('http://31.200.241.46:8080/newvalia/product/save',
+                        {"name": $scope.nameProduct,"shopList":[{"name":$scope.shop.id,"productAttr":[{"price":$scope.price,"date":$scope.date}]}]}).
 
 
                         success(function(data, status, headers, config) {
@@ -36,7 +46,7 @@
                             // or server returns response with an error status.
                         });
             };
-            $http.get('http://localhost:8080/newvalia/shop/findAll').
+            $http.get('http://31.200.241.46:8080/newvalia/shop/findAll').
                     success(function(data) {
                         $scope.shops = data;
                         console.log("out shop", $scope.shops);
@@ -48,7 +58,8 @@
 
         appModule.controller('rest',function($scope, $http) {
             $scope.selected = {};
-            $http.get('http://localhost:8080/newvalia/product/findAll').
+            $scope.selectedShop = {};
+            $http.get('http://31.200.241.46:8080/newvalia/product/findAll').
                     success(function(data) {
                         $scope.products = data;
                         console.log("out ", $scope.products);
@@ -63,7 +74,7 @@
         appModule.controller('saveShopController',function($scope, $http) {
             $scope.submitShop = function() {
                 //
-                $http.post('http://localhost:8080/newvalia/shop/save',
+                $http.post('http://31.200.241.46:8080/newvalia/shop/save',
                         {"name": $scope.nameShop, "id": $scope.nameShop}).
                         success(function(data, status, headers, config) {
                             // this callback will be called asynchronously
@@ -79,54 +90,76 @@
 </head>
 
 <body>
-<form ng-submit="submitShop()" ng-controller="saveShopController">
-    <table>
-        <tr>
-            <td>Shop name:</td><td> <input type="text" ng-model="nameShop"  /></td>
-        </tr>
-
-        <tr>
-            <td><input type="submit" id="submitShop" value="Submit" /></td>
-        </tr>
-    </table>
+<form class="form-horizontal" ng-submit="submitShop()" ng-controller="saveShopController">
+    <div class="form-group">
+        <label for="nameshop1" class="col-sm-2 control-label">Shop name</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control"  required ng-model="nameShop" id="nameshop1" placeholder="Shop name">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" id="submitShop" class="btn btn-primary">Save shop</button>
+        </div>
+    </div>
 </form>
 
-<form ng-submit="submit()" ng-controller="saveProductController">
-    <table>
-        <tr>
-            <td>Product name:</td><td> <input type="text" ng-model="nameProduct"  /></td>
-        </tr>
-        <tr>
-            <td>Price: </td><td> <input type="text" ng-model="price" /></td>
-        </tr>
-        <tr>
-            <td>Buy Date: </td><td> <input type="date" ng-model="date" placeholder="dd-MM-yyyy" required /></td>
-        </tr>
+<form  class="form-horizontal" ng-submit="submit()" ng-controller="saveProductController">
+    <div class="form-group">
+        <label for="product1" class="col-sm-2 control-label">Product name</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" required ng-model="nameProduct" id="product1" placeholder="Product name">
+        </div>
+    </div>
 
-        <tr>
-            <td>Shop: </td><td><select ng-model="shop" ng-options='shop.name for shop in shops'></select></td>
-        </tr>
+    <div class="form-group">
+        <label for="buydate1" class="col-sm-2 control-label">Buy Date</label>
+        <div class="col-sm-2">
+            <input type="date" class="form-control" required ng-model="date" id="buydate1" placeholder="dd-MM-yyyy">
+        </div>
+    </div>
 
-        <tr>
-            <td><input type="submit" id="submit" value="Submit" /></td>
-        </tr>
-    </table>
+    <div class="form-group">
+        <label for="price1" class="col-sm-2 control-label">Price</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" required ng-model="price" id="price1" placeholder="Price">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Shop</label>
+        <div class="col-sm-2">
+            <select class="form-control" ng-model="shop"  ng-options='shop.name for shop in shops' required></select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" id="submit" class="btn btn-primary">Save Product</button>
+        </div>
+    </div>
+
 </form>
-<div ng-controller="rest">
-    <table border="1"  ng-repeat="module in products">
+<div id="rest" class="container-fluid" ng-controller="rest">
+    <table height="15px" class="table table-condensed table-bordered table-hover table-striped">
         <tr>
-            <td>
+            <td class="info">
+                Product
+            </td>
+        </tr>
+        <tr ng-repeat="module in products">
+
+            <td class="info">
                 {{module.name}}
             </td>
-            <td>
-        <tr ng-repeat="col in module.shopList">
-            <td>
+
+            <td ng-repeat="col in module.shopList">
                 {{col.name}}
+
+                <select ng-model="selected.value" ng-options='pp.total as (  (pp.date | date:"dd/MM/yyyy") + ", "+ pp.price) for pp in col.productAttr'></select>
+
             </td>
-            <td><select ng-model="selected.value" ng-options='pp.total as (  (pp.date | date:"dd/MM/yyyy") + ", "+ pp.price) for pp in col.productAttr'></select>
-            </td>
-        </tr>
-        </td>
+
         </tr>
     </table>
 </div>

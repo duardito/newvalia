@@ -1,7 +1,6 @@
 package com.nva.persistence.mongodb.entities;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
@@ -14,7 +13,6 @@ public class MongoDocument implements java.io.Serializable{
     /**
      * name of template, must be unique
      */
-    @Indexed(unique = true)
     @Field(value="name")
     private String name;
 
