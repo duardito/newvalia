@@ -102,26 +102,41 @@
     </table>
 </form>
 
-<form ng-submit="submit()" ng-controller="saveProductController">
-    <table>
-        <tr>
-            <td>Product name:</td><td> <input type="text" ng-model="nameProduct" required /></td>
-        </tr>
-        <tr>
-            <td>Price: </td><td> <input type="text" ng-model="price" required /></td>
-        </tr>
-        <tr>
-            <td>Buy Date: </td><td> <input type="date" ng-model="date" placeholder="dd-MM-yyyy" required /></td>
-        </tr>
+<form  class="form-horizontal" ng-submit="submit()" ng-controller="saveProductController">
+    <div class="form-group">
+        <label for="product1" class="col-sm-2 control-label">Product name</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" required ng-model="nameProduct" id="product1" placeholder="Product name">
+        </div>
+    </div>
 
-        <tr>
-            <td>Shop: </td><td><select ng-model="shop" ng-options='shop.name for shop in shops' required></select></td>
-        </tr>
+    <div class="form-group">
+        <label for="buydate1" class="col-sm-2 control-label">Buy Date</label>
+        <div class="col-sm-2">
+            <input type="date" class="form-control" required ng-model="date" id="buydate1" placeholder="dd-MM-yyyy">
+        </div>
+    </div>
 
-        <tr>
-            <td><input type="submit" id="submit" class="btn btn-primary" value="Save Product" /></td>
-        </tr>
-    </table>
+    <div class="form-group">
+        <label for="price1" class="col-sm-2 control-label">Price</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" required ng-model="price" id="price1" placeholder="Price">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="shop1" class="col-sm-2 control-label">Shop</label>
+        <div class="col-sm-2">
+            <select class="form-control" ng-model="shop" ng-options='shop.name for shop in shops' required></select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" id="submit" class="btn btn-primary">Save Product</button>
+        </div>
+    </div>
+
 </form>
 <div id="rest" class="container-fluid" ng-controller="rest">
     <table height="15px" class="table table-condensed table-bordered table-hover table-striped">
